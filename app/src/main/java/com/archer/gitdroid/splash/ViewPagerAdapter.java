@@ -4,7 +4,9 @@ import android.content.Context;
 import android.support.v4.view.PagerAdapter;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 
+import com.archer.gitdroid.R;
 import com.archer.gitdroid.splash.pager.Pager0;
 import com.archer.gitdroid.splash.pager.Pager1;
 import com.archer.gitdroid.splash.pager.Pager2;
@@ -43,4 +45,20 @@ public class ViewPagerAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView(views[position]);
     }
+
+    public ImageView[] getViews() {
+
+        ImageView[] imageViews = new ImageView[3];
+
+        ImageView imageViews1 = (ImageView) views[2].findViewById(R.id.ivBubble1);
+        ImageView imageViews2 = (ImageView) views[2].findViewById(R.id.ivBubble2);
+        ImageView imageViews3 = (ImageView) views[2].findViewById(R.id.ivBubble3);
+
+        imageViews[0] = imageViews1;
+        imageViews[1] = imageViews2;
+        imageViews[2] = imageViews3;
+
+        return imageViews;
+    }
+
 }

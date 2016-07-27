@@ -14,6 +14,8 @@ import android.widget.FrameLayout;
 import android.widget.ImageView;
 
 import com.archer.gitdroid.R;
+import com.daimajia.androidanimations.library.Techniques;
+import com.daimajia.androidanimations.library.YoYo;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -41,6 +43,8 @@ public class SplashFragment extends Fragment {
     private int colorGreen;
     private int colorRed;
     private ArgbEvaluator argbEvaluator;
+    private ImageView[] views;
+
 
     private int widthScreen = 0;
 
@@ -58,7 +62,6 @@ public class SplashFragment extends Fragment {
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         adapter = new ViewPagerAdapter(getContext());
-        indicator = new CircleIndicator(getContext());
         viewPager.setAdapter(adapter);
         indicator.setViewPager(viewPager);
 
@@ -67,11 +70,20 @@ public class SplashFragment extends Fragment {
         colorGreen = getResources().getColor(R.color.colorGreen);
         colorRed = getResources().getColor(R.color.colorRed);
 
+        views = adapter.getViews();
+
+        views[0].setVisibility(View.GONE);
+        views[1].setVisibility(View.GONE);
+        views[2].setVisibility(View.GONE);
+
         viewPager.addOnPageChangeListener(pagerColorListener);
         viewPager.addOnPageChangeListener(pagerPhoneListener);
 
     }
 
+    /**
+     * 颜色变化
+     */
     private ViewPager.OnPageChangeListener pagerColorListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -97,6 +109,9 @@ public class SplashFragment extends Fragment {
         }
     };
 
+    /**
+     * 动画
+     */
     private ViewPager.OnPageChangeListener pagerPhoneListener = new ViewPager.OnPageChangeListener() {
         @Override
         public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
@@ -116,11 +131,25 @@ public class SplashFragment extends Fragment {
                 layoutPhone.setTranslationX(widthScreen * -positionOffset);
             }
 
-
         }
 
         @Override
         public void onPageSelected(int position) {
+
+
+
+            if (position == 2) {
+
+                views[0].setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.FadeInLeft).delay(500).duration(50).playOn(views[0]);
+
+                views[1].setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.FadeInLeft).delay(500).duration(550).playOn(views[1]);
+
+                views[2].setVisibility(View.VISIBLE);
+                YoYo.with(Techniques.FadeInLeft).delay(500).duration(1050).playOn(views[2]);
+
+            }
 
         }
 
@@ -129,7 +158,6 @@ public class SplashFragment extends Fragment {
 
         }
     };
-
 
     @Override
     public void onDestroyView() {
