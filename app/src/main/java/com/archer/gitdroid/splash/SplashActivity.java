@@ -8,6 +8,7 @@ import android.widget.Button;
 import com.archer.gitdroid.MainActivity;
 import com.archer.gitdroid.R;
 import com.archer.gitdroid.common.ActivityUtils;
+import com.archer.gitdroid.login.LoginActivity;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -34,6 +35,8 @@ public class SplashActivity extends AppCompatActivity {
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.btnLogin:
+                activityUtils.startActivity(LoginActivity.class);
+                finish();
                 break;
             case R.id.btnEnter:
                 activityUtils.startActivity(MainActivity.class);
